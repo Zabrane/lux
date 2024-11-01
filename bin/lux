@@ -16,7 +16,13 @@
 -define(APPLICATION, lux).
 -define(FILES, "--").
 
--define(EBIN_DIR, "_build/default/lib/lux/ebin").
+-define(EBIN_DIR,
+begin 
+    case filelib:is_dir("_build/default/lib/lux/ebin") of
+        true  -> "_build/default/lib/lux/ebin";
+        false -> "ebin"
+    end
+end).
 
 -ifdef(OTP_RELEASE).
     -define(stacktrace(),
