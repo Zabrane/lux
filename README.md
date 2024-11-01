@@ -21,6 +21,13 @@ environment.
 See the file **lux.html** for the full documentation or view it online
 on [GitHub](https://github.com/hawk/lux/blob/master/doc/lux.md).
 
+Install
+=======
+
+```shell
+$ rebar3 compile
+```
+
 Video walkthru of the tutorial
 ==============================
 
