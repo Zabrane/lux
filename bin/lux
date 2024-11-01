@@ -16,6 +16,8 @@
 -define(APPLICATION, lux).
 -define(FILES, "--").
 
+-define(EBIN_DIR, "_build/default/lib/lux/ebin").
+
 -ifdef(OTP_RELEASE).
     -define(stacktrace(),
             fun() -> try throw(1) catch _:_:StAcK -> StAcK end end()).
@@ -64,7 +66,7 @@ make(MainOp) ->
     require_app(MainOp, tools),
     {ok, LuxAppDir} = file:get_cwd(),
     SrcDir = filename:join([LuxAppDir, "src"]),
-    EbinDir = filename:join([LuxAppDir, "ebin"]),
+    EbinDir = filename:join([LuxAppDir, ?EBIN_DIR]),
     {ok, SrcDir} = {file:set_cwd(SrcDir), SrcDir},
     {up_to_date, EbinDir} = {make:all([debug_info,{outdir, EbinDir}]), EbinDir},
     AppStr = atom_to_list(?APPLICATION),
@@ -177,7 +179,7 @@ ensure_lux_app_dir(Retry, Mandatory) ->
                 false ->
                     ok
             end,
-            EbinDir = filename:join([AppDir, "ebin"]),
+            EbinDir = filename:join([AppDir, ?EBIN_DIR]),
             %% io:format("~s: Add directory ~p to code path\n",
             %%           [AppName, EbinDir]),
             case code:add_patha(EbinDir) of
